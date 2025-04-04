@@ -1,4 +1,4 @@
-﻿using StartupBusiness.Utils;
+﻿
 using System.ComponentModel.DataAnnotations;
 
 namespace StartupBusiness.Models

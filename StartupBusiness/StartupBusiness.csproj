@@ -21,7 +21,7 @@
     <Folder Include="Repositories\" />
     <Folder Include="Services\Implementations\" />
     <Folder Include="Services\Interfaces\" />
-    <Folder Include="Utils\" />
+    <Folder Include="Validators\" />
   </ItemGroup>
 
 </Project>
