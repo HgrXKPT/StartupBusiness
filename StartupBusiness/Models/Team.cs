@@ -2,11 +2,15 @@
 
 namespace StartupBusiness.Models
 {
-    public class Teams
+    public class Team
     {
         private string _teamName;
         private int _memberCount;
         private int _projectCount;
+
+        public int Id {
+            get; set;
+        }
 
         [Required(ErrorMessage ="TeamName Field is required")]
         [MaxLength(50,ErrorMessage ="Max TeamName lenght is 50")]
@@ -34,6 +38,13 @@ namespace StartupBusiness.Models
             set {
                 _projectCount = value;
             }
+        }
+
+        public ICollection<User> Users {
+            get; set;
+        }
+        public ICollection<Project> Project {
+            get; set;
         }
     }
 }

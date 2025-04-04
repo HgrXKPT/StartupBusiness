@@ -3,11 +3,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StartupBusiness.Models
 {
-    public class Users
+    public class User
     {
         private string _name;
         private string _email;
         private string _password;
+
+        public int Id {
+            get; set;
+        }
 
         [Required(ErrorMessage ="Name Field is requried")]
         public string Name {
@@ -39,6 +43,15 @@ namespace StartupBusiness.Models
 
                 _password = value;
             }
+        }
+
+        public int TeamsId {
+            get; set;
+        }
+
+        public Team Teams {
+            get;
+            set;
         }
 
         
