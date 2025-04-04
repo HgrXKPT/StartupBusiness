@@ -9,7 +9,7 @@ namespace StartupBusiness.Models
         private string _email;
         private string _password;
 
-        [Required(ErrorMessage ="Name field is requried")]
+        [Required(ErrorMessage ="Name Field is requried")]
         public string Name {
             get => _name;
 
@@ -18,7 +18,7 @@ namespace StartupBusiness.Models
             }
         }
 
-        [Required(ErrorMessage ="Email field is required")]
+        [Required(ErrorMessage ="Email Field is required")]
         [EmailAddress(ErrorMessage = "The email provided is invalid")]
         public string Email {
             get => _email;
@@ -32,7 +32,7 @@ namespace StartupBusiness.Models
 
         }
 
-        [Required(ErrorMessage ="Password field is required")]
+        [Required(ErrorMessage ="Password Field is required")]
         public string Password {
             get => _password;
             set {
