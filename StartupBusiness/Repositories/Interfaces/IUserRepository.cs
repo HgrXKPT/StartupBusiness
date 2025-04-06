@@ -6,5 +6,6 @@ namespace StartupBusiness.Repositories.Interfaces
     public interface IUserRepository
     {
         Task AddUser(User user);
+        Task UpdateUser(int userId, User user);
     }
 }
