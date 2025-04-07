@@ -12,7 +12,8 @@ namespace StartupBusiness.Repositories.Implementations
 
         public UserRepository(AppDbContext context)
         {
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            ;
         }
 
         public async Task AddUser(User user)
@@ -35,6 +36,8 @@ namespace StartupBusiness.Repositories.Implementations
         public async Task UpdateUser(int userId, User user)
         {
             var toUpdateUser = await _context.Users.FindAsync(userId);
+            if (toUpdateUser == null)
+                throw new KeyNotFoundException("User not found");
 
             if (!string.IsNullOrWhiteSpace(user.Name))
                 toUpdateUser.Name = user.Name;

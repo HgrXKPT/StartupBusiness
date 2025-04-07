@@ -1,9 +1,10 @@
-﻿using StartupBusiness.Models;
+﻿using StartupBusiness.DTOs.UserDto;
+using StartupBusiness.Models;
 
 namespace StartupBusiness.Services.Interfaces
 {
     public interface IUserService
     {
-        void CreateUser(User user); 
+        Task CreateUser(CreateUserDto createUserDto); 
     }
 }

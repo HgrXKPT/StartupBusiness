@@ -9,6 +9,13 @@ namespace StartupBusiness.Models
         private string _email;
         private string _password;
 
+        public User(string name, string email, string password)
+        {
+            _name = name;
+            _email = email;
+            _password = password;
+        }
+
         public int Id {
             get; set;
         }
@@ -45,11 +52,11 @@ namespace StartupBusiness.Models
             }
         }
 
-        public int TeamsId {
+        public int? TeamsId {
             get; set;
         }
 
-        public Team Teams {
+        public Team? Teams {
             get;
             set;
         }

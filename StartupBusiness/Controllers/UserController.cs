@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StartupBusiness.Core.Exceptions;
 using StartupBusiness.Data;
+using StartupBusiness.DTOs.UserDto;
 using StartupBusiness.Models;
+using StartupBusiness.Services.Implementations;
+using StartupBusiness.Services.Interfaces;
 
 namespace StartupBusiness.Controllers
 {
@@ -9,18 +13,42 @@ namespace StartupBusiness.Controllers
     public class UserController: ControllerBase
     {
 
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
+        {
+            _userService = userService ?? throw new ArgumentNullException(nameof(userService));
+        }
+
 
 
         [HttpPost("CreateUser")]
-        public async Task<IActionResult> CreateUser([FromBody] User user)
+        public async Task<IActionResult> CreateUser([FromBody] CreateUserDto createUserDto)
         {
-            //Provisorio para não ocorrer mais erros durante a criação
-            await Task.Delay(100);
+            try
+            {
+                await _userService.CreateUser(createUserDto);
+                return Ok(new
+                {
+                    mensagem = "Usuario criado com sucesso"
+                });
+            }catch(ArgumentNullException)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "invalid data entry"
+                });
+            }catch(DbExistingUserExeception ex)
+            {
+                return Conflict(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
-            return Ok(new { mensagem = "Usuario criado com sucesso" } );
+            }
+
 
         }
-       
-
-    }
 }

@@ -23,5 +23,6 @@ namespace StartupBusiness.Data
                 .WithMany(p => p.Project)
                 .HasForeignKey(p => p.TeamsId);
         }
+       
     }
 }
