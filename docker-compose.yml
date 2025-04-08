@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  startupbusiness:
+    image: ${DOCKER_REGISTRY-}startupbusiness
+    build:
+      context: .
+      dockerfile: StartupBusiness/Dockerfile
+    ports:
+      - "8080:80" # Porta exposta para acessar o app
+    depends_on:
+      - db # Indica que o serviço depende do banco de dados
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "123Hgr123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433" # Porta do SQL Server
+    volumes:
+      - sql_data:/var/opt/mssql # Volume para persistir dados
+
+volumes:
+  sql_data:
