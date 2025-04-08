@@ -31,14 +31,14 @@ namespace StartupBusiness.Controllers
                 return CreatedAtAction(nameof(CreateUser), 
                 new
                 {
-                    mensagem = "User created sucessfuly"
+                    message = "User created sucessfuly"
                 } );
 
             }catch(ArgumentNullException)
             {
                 return BadRequest(new
                 {
-                    mensagem = "invalid data entry"
+                    message = "invalid data entry"
                 });
             }catch(DbExistingUserExeception ex)
             {
@@ -60,27 +60,27 @@ namespace StartupBusiness.Controllers
                 await _userService.UpdateUser(userId, userDto);
                 return Ok(new
                 {
-                    mensagem = "User updated sucessfuly"
+                    message = "User updated sucessfuly"
                 });
             }catch(KeyNotFoundException ex)
             {
                 return NotFound(new
                 {
-                    mensagem = $"not found data: {ex.Message}"
+                    message = $"not found data: {ex.Message}"
                 });
             }
             catch (ArgumentNullException)
             {
                 return BadRequest(new
                 {
-                    mensagem = "Enter valid data to update"
+                    message = "Enter valid data to update"
                 });
             }
             catch (ArgumentException ex)
             {
                 return BadRequest(new
                 {
-                    mensagem = $"invalid data: {ex.Message}"
+                    message = $"invalid data: {ex.Message}"
                 });
             }
 
@@ -98,20 +98,20 @@ namespace StartupBusiness.Controllers
 
                 return Ok(new
                 {
-                    mensagem = "User removed"
+                    message = "User removed"
                 });
             } catch(ArgumentException ex)
             {
                 return BadRequest(new
                 {
-                    mensagem = $"invalid data: {ex.Message}"
+                    message = ex.Message
                 });
 
             }catch(KeyNotFoundException ex)
             {
                 return NotFound(new
                 {
-                    mensagem = $"NotFound data: {ex.Message}"
+                    message = ex.Message
                 });
             }
 
