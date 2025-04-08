@@ -28,10 +28,12 @@ namespace StartupBusiness.Controllers
             try
             {
                 await _userService.CreateUser(createUserDto);
-                return Ok(new
+                return CreatedAtAction(nameof(CreateUser), 
+                new
                 {
-                    mensagem = "Usuario criado com sucesso"
-                });
+                    mensagem = "User created sucessfuly"
+                } );
+
             }catch(ArgumentNullException)
             {
                 return BadRequest(new
@@ -47,8 +49,74 @@ namespace StartupBusiness.Controllers
                 return BadRequest(ex.Message);
             }
 
+        }
+
+        [HttpPatch("UpdateUser")]
+        public async Task<IActionResult> UpdateUser(int userId, [FromBody]UpdateUserDto userDto)
+        {
+
+            try
+            {
+                await _userService.UpdateUser(userId, userDto);
+                return Ok(new
+                {
+                    mensagem = "User updated sucessfuly"
+                });
+            }catch(KeyNotFoundException ex)
+            {
+                return NotFound(new
+                {
+                    mensagem = $"not found data: {ex.Message}"
+                });
+            }
+            catch (ArgumentNullException)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "Enter valid data to update"
+                });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = $"invalid data: {ex.Message}"
+                });
             }
 
 
         }
+
+        [HttpDelete("RemoveUser")]
+        public async Task<IActionResult> RemoveUser(int userid)
+        {
+
+            try
+            {
+
+                await _userService.RemoveUser(userid);
+
+                return Ok(new
+                {
+                    mensagem = "User removed"
+                });
+            } catch(ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = $"invalid data: {ex.Message}"
+                });
+
+            }catch(KeyNotFoundException ex)
+            {
+                return NotFound(new
+                {
+                    mensagem = $"NotFound data: {ex.Message}"
+                });
+            }
+
+        }
+
+
+    }
 }

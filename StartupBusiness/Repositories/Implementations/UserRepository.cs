@@ -35,9 +35,7 @@ namespace StartupBusiness.Repositories.Implementations
 
         public async Task UpdateUser(int userId, User user)
         {
-            var toUpdateUser = await _context.Users.FindAsync(userId);
-            if (toUpdateUser == null)
-                throw new KeyNotFoundException("User not found");
+            var toUpdateUser = await FindUserByIdAsync(userId);
 
             if (!string.IsNullOrWhiteSpace(user.Name))
                 toUpdateUser.Name = user.Name;
@@ -46,10 +44,30 @@ namespace StartupBusiness.Repositories.Implementations
                 toUpdateUser.Email = user.Email;
 
             if (!string.IsNullOrWhiteSpace(user.Password))
-                toUpdateUser.Password = user.Password;
+                toUpdateUser.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
 
             await _context.SaveChangesAsync();
 
+        }
+
+        public async Task RemoveUser(int userId)
+        {
+            var toDeleteUser = await FindUserByIdAsync(userId);
+
+            _context.Remove(toDeleteUser);
+            await _context.SaveChangesAsync();
+     
+
+
+        }
+
+        private  async Task<User> FindUserByIdAsync(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+                throw new KeyNotFoundException("User not found");
+
+            return user;
         }
 
 

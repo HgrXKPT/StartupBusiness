@@ -7,5 +7,6 @@ namespace StartupBusiness.Repositories.Interfaces
     {
         Task AddUser(User user);
         Task UpdateUser(int userId, User user);
+        Task RemoveUser(int userId);
     }
 }
