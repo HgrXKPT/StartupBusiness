@@ -1,7 +1,7 @@
 ﻿namespace StartupBusiness.Core.Exceptions
 {
-    public class DbExistingUserExeception : Exception
+    public class DbExistingDataExeception : Exception
     {
-        public DbExistingUserExeception(string message) : base(message) { }
+        public DbExistingDataExeception(string message) : base(message) { }
     }
 }

@@ -17,8 +17,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+//Users Dependency
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+//Team Dependency
+builder.Services.AddScoped<ITeamRepository, TeamRepository>();
+builder.Services.AddScoped<ITeamService, TeamService>();
 
 
 

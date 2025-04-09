@@ -21,7 +21,7 @@ namespace StartupBusiness.Repositories.Implementations
             var existingUser = await _context.Users.AnyAsync(u => u.Email == user.Email);
 
             if (existingUser)
-                throw new DbExistingUserExeception($"The user with email {user.Email} is already registered");
+                throw new DbExistingDataExeception($"The user with email {user.Email} is already registered");
 
             if (new[] {user.Name, user.Email, user.Password}.Any(string.IsNullOrWhiteSpace))
 

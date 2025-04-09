@@ -40,7 +40,7 @@ namespace StartupBusiness.Controllers
                 {
                     message = "invalid data entry"
                 });
-            }catch(DbExistingUserExeception ex)
+            }catch(DbExistingDataExeception ex)
             {
                 return Conflict(ex.Message);
             }

@@ -8,6 +8,13 @@ namespace StartupBusiness.Models
         private int _memberCount;
         private int _projectCount;
 
+
+        public Team(string teamName, int memberCount, int projectCount)
+        {
+            _teamName = teamName;
+            _memberCount = memberCount;
+            _projectCount = projectCount;
+        }
         public int Id {
             get; set;
         }
@@ -40,10 +47,10 @@ namespace StartupBusiness.Models
             }
         }
 
-        public ICollection<User> Users {
+        public ICollection<User>? Users {
             get; set;
         }
-        public ICollection<Project> Project {
+        public ICollection<Project>? Project {
             get; set;
         }
     }
