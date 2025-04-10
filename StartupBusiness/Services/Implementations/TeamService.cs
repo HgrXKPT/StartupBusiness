@@ -28,5 +28,13 @@ namespace StartupBusiness.Services.Implementations
             await _teamRepository.CreateTeam(team);
 
         }
+
+        public async Task DeleteTeam(int teamId)
+        {
+            if (teamId < 0)
+                throw new ArgumentException("Invalid teamId number");
+
+            await _teamRepository.DeleteTeam(teamId);
+        }
     }
 }

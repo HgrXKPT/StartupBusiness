@@ -6,5 +6,6 @@ namespace StartupBusiness.Repositories.Interfaces
     public interface ITeamRepository
     {
         Task CreateTeam(Team team);
+        Task DeleteTeam(int teamId);
     }
 }

@@ -43,10 +43,25 @@ namespace StartupBusiness.Controllers
             {
                 return BadRequest(ex.Message);
             }
-
-
-
         }
+
+        [HttpDelete("DeleteTeam")]
+        public async Task<IActionResult> DeleteTeam(int teamId)
+        {
+            try
+            {
+                await _teamservice.DeleteTeam(teamId);
+                return Ok("Team deleted");
+            }catch(DbExistingDataExeception ex)
+            {
+                return NotFound(ex.Message);
+            }catch(ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
+        }
+
 
     }
 }

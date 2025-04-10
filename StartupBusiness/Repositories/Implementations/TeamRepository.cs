@@ -30,5 +30,20 @@ namespace StartupBusiness.Repositories.Implementations
 
            
         }
+
+        public async Task DeleteTeam(int teamId)
+        {
+
+            var team = await _context.Teams.FirstOrDefaultAsync(t => t.Id == teamId);
+            if(team == null)
+                throw new DbExistingDataExeception($"A team with id {teamId} doesn't exists");
+
+            _context.Remove(team);
+            await _context.SaveChangesAsync();
+        }
+
+
+       
+
     }
 }
